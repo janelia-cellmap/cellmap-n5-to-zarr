@@ -58,15 +58,10 @@ def copy_arrays_data(src_dest_info,
         if isinstance(src_obj, zarr.core.Array):
             zarrays = [src_obj]
         else:
-            zarrays = [key_val_arr[1] for key_val_arr in (src_obj.arrays())]
+            zarrays = [key_val_arr[1] for key_val_arr in (src_obj.arrays(recurse = True))]
         
         for arr_src in zarrays:
             start_time = time.time()
-            #arr_src = item[1]
-
-            #the chunk sizing of a dask array has a very big impact on computation performance
-            # for example: for ~10TB dataset, use ~300MB chunk size.
-            #darray = da.from_array(arr_src, chunks=optimal_dask_chunksize(arr_src, max_dask_chunk_num))
             
             if isinstance(src_obj, zarr.core.Array):
                 dest_arr = zarr.open(store = zs,

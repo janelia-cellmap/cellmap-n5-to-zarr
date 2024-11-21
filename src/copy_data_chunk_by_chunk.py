@@ -45,7 +45,7 @@ def copy_arrays_data(src_dest_info,
         if isinstance(src_obj, zarr.core.Array):
             zarrays = [src_obj]
         else:
-            zarrays = [key_val_arr[1] for key_val_arr in (src_obj.arrays())]
+            zarrays = [key_val_arr[1] for key_val_arr in (src_obj.arrays(recurse=True))]
         
         for arr_src in zarrays:
             start_time = time.time()
@@ -86,39 +86,6 @@ def copy_arrays_data(src_dest_info,
                 result = wait(fut)
                 print(f'Completed {len(part)} tasks in {time.time() - start}s')
                 
-                
-                
-                
 
-        
-                    
-                    
-                    
-
-# def cluster_compute(scheduler, num_cores):
-#     def decorator(function):
-#         def wrapper(*args, **kwargs):
-#             if scheduler == "lsf":
-#                 num_cores = 30
-#                 cluster = LSFCluster( cores=num_cores,
-#                         processes=1,
-#                         memory=f"{15 * num_cores}GB",
-#                         ncpus=num_cores,
-#                         mem=15 * num_cores,
-#                         walltime="48:00",
-#                         death_timeout = 240.0,
-#                         local_directory = "/scratch/zubovy/"
-#                         )
-#                 cluster.scale(num_cores)
-#             elif scheduler == "local":
-#                     cluster = LocalCluster()
-
-#             with Client(cluster) as cl:
-#                 text_file = open(os.path.join(os.getcwd(), "dask_dashboard_link" + ".txt"), "w")
-#                 text_file.write(str(cl.dashboard_link))
-#                 text_file.close()
-#                 cl.compute(function(*args, **kwargs), sync=True)
-#         return wrapper
-#     return decorator
 
 
