@@ -110,12 +110,12 @@ def copy_arrays_data(src_dest_info,
 @click.option('--masks', '-m', default = "", type=click.STRING)
 @click.option('--lm', '-lm', default = "", type=click.STRING)
 @click.option('--num_workers', '-c', default = 200, type=click.INT)
-@click.option('--scheduler', '-s', default = "lsf", type=click.STRING)
+@click.option('--cluster', '-s', default = "lsf", type=click.STRING)
 @click.option('--clevel', '-cl', default = 6, type=click.INT)
 @click.option('--max_dask_chunk_num', '-maxchnum' , default = 50000, type=click.INT)
 @click.option('--dry', default = False, type=click.BOOL)
 
-def cli(src, dest, mtype, gtruth, inf, masks, lm, num_workers, scheduler, clevel, max_dask_chunk_num, dry):
+def cli(src, dest, mtype, gtruth, inf, masks, lm, num_workers, cluster, clevel, max_dask_chunk_num, dry):
     compressor = Zstd(level=clevel)
 
     num_cores = 1
